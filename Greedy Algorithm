@@ -1,0 +1,65 @@
+// GREEDY ALGORITHM:
+
+#include<stdio.h>
+int max(int a[],int n)
+{
+    int l=a[0];
+    for(int i=0;i<n;i++)
+        if(a[i]>l)
+            l=a[i];
+    return l;
+}
+int remov(int l,int a[],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]==l)
+        {
+            for(int j=i;j<n;j++)
+                a[j]=a[j+1];
+        }
+    }
+    int ln=max(a,n-1);
+    return ln;
+}
+int main()
+{
+    int n,sum,c=0;
+    printf("No. of Coins:");
+    scanf("%d",&n);
+    int a[n];
+    printf("Coins:");
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    printf("Sum:");
+    scanf("%d",&sum);
+    int l;
+    l=max(a,n);
+    while(sum>0)
+    {
+        if(l>sum)
+        {
+            l=remov(l,a,n);
+            n--;
+        }
+    // printf("%d",l);
+        else if(l==sum)
+        {    
+            c++;
+            sum-=l;
+        }
+        else if(l<sum)
+        {
+            c++;
+            sum=sum-l;
+            if(sum>=l)
+            {
+                c++;
+                sum=sum-l;
+                // l=remov(l,a,n);
+            }
+        }
+    }
+    printf("\nThe minimum no. of coins required : %d",c);
+    return 0;
+}
