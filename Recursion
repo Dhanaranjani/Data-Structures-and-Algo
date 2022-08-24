@@ -1,0 +1,60 @@
+// RECURSION ALGORITHM:
+
+#include<stdio.h>
+int c=0;
+int max(int a[],int n)
+{
+    int l=a[0];
+    for(int i=0;i<n;i++)
+        if(a[i]>l)
+            l=a[i];
+    return l;
+}
+int remov(int l,int a[],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]==l)
+        {
+            for(int j=i;j<n;j++)
+                a[j]=a[j+1];
+        }
+    }
+    int ln=max(a,n-1);
+    return ln;
+}
+int recur(int a[],int l,int sum,int n)
+{
+    if(sum>0)
+    {
+        if(l>sum)
+        {
+            l=remov(l,a,n);
+            n--;
+        }
+        else if(l<=sum)
+        {
+            c++;
+            sum=sum-l;
+        }
+        recur(a,l,sum,n);
+    }
+    return c;
+}
+int main()
+{
+    int n,sum;
+    printf("No. of Coins:");
+    scanf("%d",&n);
+    int a[n];
+    printf("Coins:");
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    printf("Sum:");
+    scanf("%d",&sum);
+    int l,x=sum;
+    l=max(a,n);
+    int c=recur(a,l,sum,n);
+    printf("MIn coins: %d",c);
+    return 0;
+}
