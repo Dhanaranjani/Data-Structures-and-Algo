@@ -1,0 +1,42 @@
+//Top Down 
+#include<stdio.h>
+int main()
+{
+    int n,k,count=0,min=0,sum,z=0;
+    printf("No. of coins: ");
+    scanf("%d",&n);
+    int a[n],b[n];
+    printf("Coins: ");
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    printf("Sum:" );
+    scanf("%d",&sum);
+    while(sum>0)
+    {
+        for(int i=0;i<n;i++)
+        {
+          k=i;
+            if(a[i]<=sum)
+            {
+                b[k]=sum-a[i];
+            }
+            else
+              b[k]=100;
+        }
+        //count++;
+        min=b[0];
+        for(int i=0;i<n;i++)
+        {
+            if(b[i]<min && b[i]>=0)
+            {
+                min=b[i];
+                z=i;
+            }
+        }
+        //sum>a[z]?(sum-=a[z]):(sum=a[z]-sum);
+        sum-=a[z];
+        //printf("%d\n",sum);
+        count++;
+    }
+    printf("%d",count);
+}
