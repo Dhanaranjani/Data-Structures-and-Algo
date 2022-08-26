@@ -1,0 +1,39 @@
+//Bottom up
+#include<stdio.h>
+int main()
+{
+    int n,sum,c;
+    printf("No. ");
+    scanf("%d",&n);
+    int a[n];
+    printf("Coins: ");
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    printf("Sum: ");
+    scanf("%d",&sum);
+    int b[sum+1];
+    b[0]=0;
+    for(int i=1;i<=sum;i++)
+    {
+        b[i]=sum+1;
+    }
+    for(int i=1;i<=sum;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            c=0;
+            if(i-a[j]>=0)
+            {
+                c++;
+                c=c+b[(i-a[j])];
+                if(c<b[i])
+                  b[i]=c;
+            }
+        }
+    }
+    if(b[sum]==sum+1)
+        printf("Min Coins: 0");
+    else
+        printf("Min coins: %d",b[sum]);
+    return 0;
+}
