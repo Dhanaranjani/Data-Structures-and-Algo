@@ -1,0 +1,41 @@
+//Brute force
+#include<stdio.h>
+void check(int b[],int a[],int index,int j,int s,int e,int sum)
+{
+    int add=0;
+    if(index==j)
+    {
+        for(int i=0;i<j;i++)
+            add+=b[i];
+        if(add==sum)
+        {
+            for(int i=0;i<j;i++)
+                printf("%d ",b[i]);
+            printf("\n");
+        }
+        return;
+    }
+    for(int i=s;i<=e;i++)
+    {
+        b[index]=a[i];
+        check(b,a,index+1,j,i,e,sum);
+    }
+    return;
+}
+void combination(int a[],int e, int sum, int i)
+{
+    int b[i+1];
+    check(b,a,0,i,0,e,sum);
+}
+int main()
+{
+    int n,sum;
+    scanf("%d",&n);
+    int a[n];
+    for(int i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    scanf("%d",&sum);
+    for(int i=1;i<=sum;i++)
+        combination(a,n-1,sum,i);
+    return 0;
+}
